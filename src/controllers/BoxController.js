@@ -17,7 +17,10 @@ class BoxController {
   }
 
   async list(req, res) {
-    const boxes = await Box.find({});
+    const boxes = await Box.find({}).populate({
+      path: 'files',
+      options: { sort: { createdAt: -1 } }
+    });
     return res.json(boxes);
   }
 }
